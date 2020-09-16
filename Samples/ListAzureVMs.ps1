@@ -2,6 +2,4 @@
 
 .\AuthenticateAzure.ps1
 
-$VMs = Get-AzureRMVM
-
-Write-Output $VMs
+Get-AzureRMVM|Format-Table
