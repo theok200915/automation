@@ -2,4 +2,7 @@
 
 .\AuthenticateAzure.ps1
 
-Get-AzureRMVM|Format-Table
+$VMs = Get-AzureRMVM
+foreach($VM in $VMs){
+    Write-Output "$($VM.Name)"
+}
