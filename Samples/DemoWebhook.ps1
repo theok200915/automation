@@ -32,14 +32,14 @@ if ($WebhookData) {
                 throw "Could not retrieve connection asset: $ConnectionAssetName. Check that this asset exists in the Automation account."
             }
             Write-Output "Authenticating to Azure with service principal."
-            Add-AzAccount -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint | Write-Output
+            Add-AzureRMAccount -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint | Write-Output
 
         # Start each virtual machine
         foreach ($vm in $vms)
         {
             $vmName = $vm.Name
             Write-Output "Starting $vmName"
-            Start-AzVM -Name $vm.Name -ResourceGroup $vm.ResourceGroup
+            Start-AzureRMVM -Name $vm.Name -ResourceGroup $vm.ResourceGroup
         }
 }
 else {
