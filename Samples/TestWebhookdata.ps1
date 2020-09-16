@@ -3,18 +3,18 @@ param(
 )
 
 if($null -ne $WebhookData){
-    $WebhookData = $WbhookData.WebhookName
-    $WebhookHeaders = $WebhookData.RequestHeader
-    $WebhookBody = $WebhookData.RequestBody
+        # Collect properties of WebhookData.
+        $WebhookName    =   $WebhookData.WebhookName 
+        $WebhookHeaders =   $WebhookData    
+        $WebhookBody    =   $WebhookData.RequestBody
+        $SearchResults = (ConvertFrom-JSON $WebhookBody).SearchResults
+        $SearchResultsValue = $SearchResults.value
 
-    $From = $WebhookHeader.From
-    $List = ConvertFrom-Json -InputObject $WebhookBody
-
-    Write-Output "Runbook started from webhook $WebhookName by $From."
-    Write-output $List
-
-    Write-output $WebhookHeaders
+        Write-Output $WebhookName
+        Write-Output $WebhookHeaders
+        Write-Output $SearchResultsValue
 }
 else {
     Write-Error "Runbook mean to be started only from webhook"
 }
+
